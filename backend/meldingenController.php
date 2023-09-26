@@ -11,7 +11,7 @@ echo $attractie . " / " . $capaciteit . " / " . $melder;
 require_once 'conn.php';
 
 //2. Query
-$query = "INSERT INTO meldingen (attractie, type) VALUES(:attractie, :type)";
+$query = "INSERT INTO meldingen (attractie, type, melder) VALUES(:attractie, :type, :melder)";
 //3. Prepare
 $statement = $conn->prepare($query);
 //4. Execute
