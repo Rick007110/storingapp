@@ -17,4 +17,4 @@ $statement = $conn->prepare($query);
 //4. Execute
 $statement->execute([ ":attractie" => $attractie, ":type" => $type, ":melder" => $melder,]);
 
-$items = $statement->fetchAll(PDO::FETCH_ASSOC);
+// $items = $statement->fetchAll(PDO::FETCH_ASSOC);
