@@ -46,7 +46,7 @@
                 <label for="prio-text">Deze melding heeft hoge prioriteit</label>
             </div>
             <div class="form-group">
-                <label for="overig-text">Overige informatie: </label>
+                <label for="overige_info-text">Overige informatie: </label>
                 <textarea name="overig" id="overig" class="form-input" rows="4"></textarea>
             </div>
             
