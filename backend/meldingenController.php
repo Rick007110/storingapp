@@ -1,8 +1,9 @@
 <?php
 
+// Initialize the errors array
 $errors = [];
 
-//Variabelen vullen
+// Variables
 $attractie = $_POST['attractie'];
 if (empty($attractie)) {
     $errors[] = "Vul de attractie-naam in.";
@@ -15,36 +16,34 @@ if (!is_numeric($capaciteit)) {
     $errors[] = "Vul voor capaciteit een geldig getal in.";
 }
 
-$prioriteit = isset($_POST['prioriteit']); // Use the posted value directly
 $melder = $_POST['melder'];
 $overig = $_POST['overig'];
+$prioriteit = isset($_POST['prioriteit']) ? 1 : 0; // Convert boolean to integer
 
-if(isset($_POST['prioriteit']))
-{
-    $prioriteit = true;
+// Check for errors
+if (!empty($errors)) {
+    // Display errors or handle them as needed
+    var_dump($errors);
+    die();
 }
-else
-{
-    $prioriteit = false;
-}
-
-if(isset($errors)) { var_dump($errors); die(); }
 
 echo $attractie . " / " . $type . " / " . $capaciteit . " / " . $prioriteit . " / " . $melder . " / " . $overig;
 
-//1. Verbinding
+// Database connection
 require_once 'conn.php';
 
-//2. Query
+// SQL query
 $query = "INSERT INTO meldingen (attractie, type, capaciteit, prioriteit, melder, overige_info) VALUES(:attractie, :type, :capaciteit, :prioriteit, :melder, :overige_info)";
-//3. Prepare
+
+// Prepare statement
 $statement = $conn->prepare($query);
-//4. Execute
-$statement->execute([ 
+
+// Execute query
+$statement->execute([
     ":attractie" => $attractie,
     ":type" => $type,
     ":capaciteit" => $capaciteit,
-    ":prioriteit" => $prioriteit,
+    ":prioriteit" => $prioriteit, // Use the integer value
     ":melder" => $melder,
     ":overige_info" => $overig,
 ]);
