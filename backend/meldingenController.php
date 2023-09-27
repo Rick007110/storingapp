@@ -1,10 +1,21 @@
 <?php
 
+$errors = [];
+
 //Variabelen vullen
 $attractie = $_POST['attractie'];
+if (empty($attractie)) {
+    $errors[] = "Vul de attractie-naam in.";
+}
+
 $type = $_POST['type'];
+
 $capaciteit = $_POST['capaciteit'];
-$prioriteit = $_POST['prioriteit'];
+if (!is_numeric($capaciteit)) {
+    $errors[] = "Vul voor capaciteit een geldig getal in.";
+}
+
+$prioriteit = isset($_POST['prioriteit']); // Use the posted value directly
 $melder = $_POST['melder'];
 $overig = $_POST['overig'];
 
@@ -16,6 +27,8 @@ else
 {
     $prioriteit = false;
 }
+
+if(isset($errors)) { var_dump($errors); die(); }
 
 echo $attractie . " / " . $type . " / " . $capaciteit . " / " . $prioriteit . " / " . $melder . " / " . $overig;
 
